@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Upload Tugas | Muhammad Fakhri Hidayat</title>
+  <meta
+    name="description"
+    content="Halaman admin khusus untuk login dan upload tugas ke Supabase."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="assets/css/upload-tugas.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="upload-tugas.html">Admin Upload</a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        <a href="index.html">Portofolio</a>
+        <a href="#admin-area">Workspace</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero" id="admin-hero">
+        <article class="card hero-copy">
+          <div class="eyebrow">Admin Workspace</div>
+          <h1>Kelola <span>Tugas</span> Dengan Lebih Rapi.</h1>
+          <p class="lead">
+            Workspace ini dibuat khusus untuk login admin, upload tugas, dan mengelola file
+            yang tampil di halaman portofolio tanpa mencampurnya dengan halaman publik.
+          </p>
+          <div class="hero-points" aria-label="Ringkasan workspace admin">
+            <div class="hero-point">
+              <strong>Upload</strong>
+              <span>Simpan file dan metadata tugas dalam satu alur.</span>
+            </div>
+            <div class="hero-point">
+              <strong>Kelola</strong>
+              <span>Edit atau hapus tugas langsung dari dashboard admin.</span>
+            </div>
+            <div class="hero-point">
+              <strong>Aman</strong>
+              <span>Hanya email admin terdaftar yang dapat mengakses workspace.</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-secondary" href="index.html">Kembali ke Portofolio</a>
+          </div>
+          <div class="session-note">
+            Session admin akan logout otomatis setelah beberapa menit tidak aktif untuk menjaga akses tetap aman.
+          </div>
+        </article>
+
+        <aside class="card login-card login-wrap" id="login-wrap">
+          <div class="section-title">
+            <h2>Login Admin</h2>
+          </div>
+          <p class="muted section-subtitle">
+            Gunakan akun admin Supabase yang terdaftar untuk membuka workspace ini.
+          </p>
+          <form class="form" id="login-form">
+            <div class="field">
+              <label for="admin-email">Email Admin</label>
+              <input id="admin-email" name="email" type="email" placeholder="admin@email.com" required />
+            </div>
+            <div class="field">
+              <label for="admin-password">Password</label>
+              <input id="admin-password" name="password" type="password" placeholder="Masukkan password" required />
+            </div>
+            <button class="button button-primary" type="submit">Masuk</button>
+          </form>
+          <div class="status-box info" id="auth-status"></div>
+          <p class="helper helper-spaced">
+            Hanya email admin yang diizinkan yang bisa masuk. Password tidak ditampilkan lagi setelah user dibuat di Supabase.
+          </p>
+        </aside>
+      </section>
+
+      <section class="workspace hidden" id="admin-area">
+        <article class="card workspace-card">
+          <div class="section-title">
+            <h3 id="form-title">Upload Tugas</h3>
+            <button class="button button-secondary" id="logout-button" type="button">Logout</button>
+          </div>
+          <p class="muted section-subtitle">
+            Isi detail tugas di bawah ini, lalu upload file agar langsung masuk ke daftar tugas publik.
+          </p>
+
+          <div class="admin-meta">
+            <div class="meta-box">
+              <strong>Storage</strong>
+              <span class="muted">Bucket tugas-project</span>
+            </div>
+            <div class="meta-box">
+              <strong>Database</strong>
+              <span class="muted">Table assignments</span>
+            </div>
+            <div class="meta-box">
+              <strong>Admin Aktif</strong>
+              <span class="muted" id="admin-email-label">Belum login</span>
+            </div>
+            <div class="meta-box">
+              <strong>Total Tugas</strong>
+              <span class="muted" id="task-count-label">0 tugas tersimpan</span>
+            </div>
+          </div>
+
+          <form class="form" id="upload-form">
+            <div class="field">
+              <label for="title">Judul Tugas</label>
+              <input id="title" name="title" type="text" placeholder="Contoh: Tugas Cloud Computing 4" required />
+            </div>
+            <div class="field">
+              <label for="course">Mata Kuliah</label>
+              <input id="course" name="course" type="text" placeholder="Contoh: Cloud Computing" />
+            </div>
+            <div class="field">
+              <label for="description">Deskripsi</label>
+              <textarea id="description" name="description" placeholder="Tulis ringkasan singkat tugas ini"></textarea>
+            </div>
+            <div class="field">
+              <label for="file">File Tugas</label>
+              <input id="file" name="file" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx,.ppt,.pptx" required />
+              <small id="file-help">File wajib dipilih saat upload tugas baru. Format: PDF, gambar, DOC/DOCX, atau PPT/PPTX. Maksimal 10 MB.</small>
+            </div>
+            <div class="task-actions">
+              <button class="button button-primary" id="submit-button" type="submit">Upload Tugas</button>
+              <button class="button button-secondary hidden" id="cancel-edit-button" type="button">Batal Edit</button>
+            </div>
+          </form>
+
+          <div class="status-box info" id="upload-status"></div>
+        </article>
+
+        <article class="card list-card">
+          <div class="section-title">
+            <h3>Daftar Tugas</h3>
+            <button class="button button-secondary" id="refresh-tasks" type="button">Refresh</button>
+          </div>
+          <p class="muted section-subtitle list-intro">
+            Semua tugas yang sudah tersimpan akan muncul di sini. Kamu bisa membuka file,
+            mengedit informasi, atau menghapusnya kapan saja.
+          </p>
+          <div class="task-grid" id="task-grid">
+            <p class="empty-state">Login admin untuk melihat daftar tugas.</p>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Admin Upload Tugas | Workspace khusus Supabase.</p>
+    </div>
+  </footer>
+  <script type="module" src="assets/js/upload-tugas.js"></script>
+</body>
+</html>
+
+
