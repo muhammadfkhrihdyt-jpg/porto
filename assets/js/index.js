@@ -1,7 +1,14 @@
-import { createPublicClient, TABLE_NAME } from "./config.js";
+import { SEMESTER_6_COURSES, createPublicClient, TABLE_NAME } from "./config.js";
 
 const supabase = createPublicClient();
 const taskGrid = document.getElementById("task-grid");
+const filterToggle = document.getElementById("filter-toggle");
+const courseFilter = document.getElementById("course-filter");
+const activeFilterLabel = document.getElementById("active-filter-label");
+const filterButtons = document.querySelectorAll("[data-course-filter]");
+
+let allTasks = [];
+let activeCourseFilter = "all";
 
 const formatDate = (value) => {
   if (!value) {
@@ -42,6 +49,34 @@ const getFileLabel = (type) => {
   return "Document";
 };
 
+const normalizeCourse = (course) => String(course || "").trim().toUpperCase();
+
+const getCourseLabel = (course) => {
+  if (course === "all") {
+    return "Semua Tugas";
+  }
+
+  const activeButton = [...filterButtons].find((button) => button.dataset.courseFilter === course);
+  return activeButton?.textContent?.trim() || course;
+};
+
+const updateFilterLabel = () => {
+  if (activeFilterLabel) {
+    activeFilterLabel.classList.remove("is-swapping");
+    void activeFilterLabel.offsetWidth;
+    activeFilterLabel.classList.add("is-swapping");
+    activeFilterLabel.textContent = getCourseLabel(activeCourseFilter);
+  }
+};
+
+const getFilteredTasks = () => {
+  if (activeCourseFilter === "all") {
+    return allTasks;
+  }
+
+  return allTasks.filter((task) => normalizeCourse(task.course) === activeCourseFilter);
+};
+
 const buildPreview = (url, title) => {
   const safeUrl = escapeHtml(url);
   const safeTitle = escapeHtml(title);
@@ -75,7 +110,10 @@ const buildPreview = (url, title) => {
 
 const renderTasks = (tasks) => {
   if (!tasks.length) {
-    taskGrid.innerHTML = '<p class="empty-state">Belum ada data tugas yang ditampilkan.</p>';
+    taskGrid.innerHTML =
+      activeCourseFilter === "all"
+        ? '<p class="empty-state">Belum ada data tugas yang ditampilkan.</p>'
+        : '<p class="empty-state">Belum ada tugas untuk mata kuliah ini.</p>';
     return;
   }
 
@@ -116,8 +154,37 @@ const loadTasks = async () => {
     return;
   }
 
-  renderTasks(data || []);
+  allTasks = data || [];
+  renderTasks(getFilteredTasks());
 };
+
+filterButtons.forEach((button) => {
+  const course = button.dataset.courseFilter || "all";
+
+  if (course !== "all" && !SEMESTER_6_COURSES.includes(course)) {
+    button.hidden = true;
+    return;
+  }
+
+  button.addEventListener("click", () => {
+    activeCourseFilter = course;
+
+    filterButtons.forEach((item) => {
+      item.classList.toggle("is-active", item === button);
+    });
+
+    updateFilterLabel();
+    renderTasks(getFilteredTasks());
+  });
+});
+
+filterToggle?.addEventListener("click", () => {
+  const isOpen = filterToggle.getAttribute("aria-expanded") === "true";
+  filterToggle.setAttribute("aria-expanded", String(!isOpen));
+  courseFilter?.classList.toggle("is-open", !isOpen);
+});
+
+updateFilterLabel();
 
 const observer = new IntersectionObserver(
   (entries) => {

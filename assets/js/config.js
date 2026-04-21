@@ -11,6 +11,14 @@ export const MAX_UPLOAD_SIZE_MB = 10;
 export const MAX_UPLOAD_SIZE_BYTES = MAX_UPLOAD_SIZE_MB * 1024 * 1024;
 export const ALLOWED_FILE_EXTENSIONS = [".pdf", ".jpg", ".jpeg", ".png", ".webp", ".doc", ".docx", ".ppt", ".pptx"];
 export const FILE_INPUT_ACCEPT = ALLOWED_FILE_EXTENSIONS.join(",");
+export const SEMESTER_6_COURSES = [
+  "CYBER SECURITY",
+  "CLOUD COMPUTING",
+  "REKAYASA PERANGKAT LUNAK",
+  "INTERNET OF THINGS",
+  "TEKNOLOGI WEB SERVICE",
+  "PROYEK PERANGKAT LUNAK",
+];
 
 export const createPublicClient = () =>
   createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {

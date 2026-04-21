@@ -139,7 +139,31 @@
           <div class="task-list-header">
             <div>
               <h3>Koleksi Tugas</h3>
-              <p class="task-meta">Beberapa tugas yang telah saya upload dan susun agar mudah dilihat.</strong></p>
+              <p class="task-meta">Beberapa tugas yang telah saya upload dan susun agar mudah dilihat.</p>
+            </div>
+          </div>
+          <div class="filter-panel">
+            <button
+              class="filter-toggle"
+              id="filter-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="course-filter"
+            >
+              <span>
+                <small>Filter Mata Kuliah</small>
+                <strong id="active-filter-label">Semua Tugas</strong>
+              </span>
+              <span class="filter-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="course-filter" id="course-filter" aria-label="Filter mata kuliah semester 6">
+              <button class="filter-chip is-active" type="button" data-course-filter="all">Semua</button>
+              <button class="filter-chip" type="button" data-course-filter="CYBER SECURITY">Cyber Security</button>
+              <button class="filter-chip" type="button" data-course-filter="CLOUD COMPUTING">Cloud Computing</button>
+              <button class="filter-chip" type="button" data-course-filter="REKAYASA PERANGKAT LUNAK">Rekayasa Perangkat Lunak</button>
+              <button class="filter-chip" type="button" data-course-filter="INTERNET OF THINGS">Internet of Things</button>
+              <button class="filter-chip" type="button" data-course-filter="TEKNOLOGI WEB SERVICE">Teknologi Web Service</button>
+              <button class="filter-chip" type="button" data-course-filter="PROYEK PERANGKAT LUNAK">Proyek Perangkat Lunak</button>
             </div>
           </div>
           <div class="task-grid" id="task-grid">

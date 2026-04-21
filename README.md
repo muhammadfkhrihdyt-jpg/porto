@@ -21,3 +21,4 @@ Proyek ini menggunakan tabel `assignments` pada Supabase. Pastikan Anda memiliki
 
 ## 📦 Link kami
 https://porto-psi-six.vercel.app/
+https://porto-psi-six.vercel.app/workspace-admin-fakhri.html

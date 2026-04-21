@@ -511,6 +511,155 @@
       flex-wrap: wrap;
     }
 
+    .filter-panel {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .filter-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(32, 26, 23, 0.08);
+      border-radius: 22px;
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(255, 248, 238, 0.96), rgba(244, 223, 204, 0.76)),
+        radial-gradient(circle at top right, rgba(199, 91, 57, 0.12), transparent 35%);
+      box-shadow: 0 14px 34px rgba(91, 60, 36, 0.08);
+      cursor: pointer;
+      text-align: left;
+      transition:
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.32s ease,
+        background 0.32s ease;
+    }
+
+    .filter-toggle:hover,
+    .filter-toggle:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(199, 91, 57, 0.18);
+      box-shadow: 0 18px 42px rgba(91, 60, 36, 0.12);
+      outline: none;
+    }
+
+    .filter-toggle small,
+    .filter-toggle strong {
+      display: block;
+    }
+
+    .filter-toggle small {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .filter-toggle strong {
+      font-family: "Syne", sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: -0.04em;
+      transform-origin: left center;
+    }
+
+    .filter-toggle strong.is-swapping {
+      animation: filterLabelSwap 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .filter-toggle-icon {
+      width: 2.4rem;
+      height: 2.4rem;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #fff9f1;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(143, 52, 27, 0.18);
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
+      flex: 0 0 auto;
+    }
+
+    .filter-toggle[aria-expanded="true"] .filter-toggle-icon {
+      transform: rotate(45deg);
+      box-shadow: 0 14px 24px rgba(143, 52, 27, 0.24);
+    }
+
+    .course-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      pointer-events: none;
+      transform: translateY(-8px) scale(0.985);
+      filter: blur(4px);
+      transition:
+        max-height 0.46s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease,
+        padding 0.32s ease,
+        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.34s ease;
+    }
+
+    .course-filter.is-open {
+      max-height: 260px;
+      opacity: 1;
+      padding: 0.2rem 0 0.4rem;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    @keyframes filterLabelSwap {
+      0% {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .filter-chip {
+      border: 1px solid rgba(32, 26, 23, 0.09);
+      background: rgba(255, 248, 238, 0.82);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.68rem 0.95rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .filter-chip:hover,
+    .filter-chip:focus-visible {
+      transform: translateY(-2px);
+      color: var(--accent-dark);
+      background: rgba(255, 248, 238, 0.98);
+      box-shadow: 0 12px 22px rgba(143, 52, 27, 0.11);
+      outline: none;
+    }
+
+    .filter-chip.is-active {
+      color: #fff9f1;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      border-color: transparent;
+      box-shadow: 0 14px 24px rgba(143, 52, 27, 0.18);
+    }
+
     .task-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -716,6 +865,18 @@
       .hero-actions,
       .task-actions {
         flex-direction: column;
+      }
+
+      .course-filter {
+        flex-direction: column;
+      }
+
+      .course-filter.is-open {
+        max-height: 560px;
+      }
+
+      .filter-chip {
+        width: 100%;
       }
 
       .social-row {
