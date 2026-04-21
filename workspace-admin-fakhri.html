@@ -86,10 +86,21 @@
       </section>
 
       <section class="workspace hidden" id="admin-area">
+        <div class="workspace-header card">
+          <div>
+            <div class="eyebrow">Dashboard Admin</div>
+            <h2>Workspace Tugas</h2>
+            <p class="muted">Upload, edit, dan pantau tugas yang tampil di portofolio publik.</p>
+          </div>
+          <div class="workspace-header-actions">
+            <a class="button button-secondary" href="index.html">Lihat Portofolio</a>
+            <button class="button button-ghost" id="logout-button" type="button">Logout</button>
+          </div>
+        </div>
+
         <article class="card workspace-card">
           <div class="section-title">
             <h3 id="form-title">Upload Tugas</h3>
-            <button class="button button-secondary" id="logout-button" type="button">Logout</button>
           </div>
           <p class="muted section-subtitle">
             Isi detail tugas di bawah ini, lalu upload file agar langsung masuk ke daftar tugas publik.
@@ -97,18 +108,22 @@
 
           <div class="admin-meta">
             <div class="meta-box">
+              <span class="meta-icon" aria-hidden="true">ST</span>
               <strong>Storage</strong>
               <span class="muted">Bucket tugas-project</span>
             </div>
             <div class="meta-box">
+              <span class="meta-icon" aria-hidden="true">DB</span>
               <strong>Database</strong>
               <span class="muted">Table assignments</span>
             </div>
             <div class="meta-box">
+              <span class="meta-icon" aria-hidden="true">AD</span>
               <strong>Admin Aktif</strong>
               <span class="muted" id="admin-email-label">Belum login</span>
             </div>
             <div class="meta-box">
+              <span class="meta-icon" aria-hidden="true">TS</span>
               <strong>Total Tugas</strong>
               <span class="muted" id="task-count-label">0 tugas tersimpan</span>
             </div>
@@ -166,4 +181,3 @@
   <script type="module" src="assets/js/upload-tugas.js"></script>
 </body>
 </html>
-
