@@ -632,8 +632,12 @@
     }
 
     @media (max-width: 720px) {
+      .container {
+        width: min(calc(100% - 1.15rem), var(--max-width));
+      }
+
       main {
-        padding: 2.5rem 0 3rem;
+        padding: 2rem 0 2.8rem;
       }
 
       .hero-copy,
@@ -641,12 +645,64 @@
       .workspace-header,
       .workspace-card,
       .list-card {
-        padding: 1.3rem;
+        padding: 1.15rem;
+        border-radius: 24px;
       }
 
       .nav {
         flex-direction: column;
         align-items: flex-start;
+        padding: 0.8rem 0;
+        gap: 0.75rem;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .brand {
+        font-size: 0.95rem;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(2.45rem, 15vw, 3.7rem);
+      }
+
+      .lead {
+        font-size: 0.98rem;
+        line-height: 1.75;
+      }
+
+      .hero {
+        gap: 1rem;
+      }
+
+      .hero-point,
+      .session-note,
+      .meta-box {
+        border-radius: 18px;
+      }
+
+      .workspace {
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .workspace-header {
+        gap: 1rem;
+      }
+
+      .workspace-header h2 {
+        font-size: clamp(2rem, 13vw, 3rem);
+      }
+
+      .workspace-header p,
+      .section-subtitle,
+      .muted,
+      .helper {
+        line-height: 1.7;
       }
 
       .admin-meta {
@@ -661,6 +717,42 @@
 
       .button {
         width: 100%;
+        min-height: 3.05rem;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        min-height: 3.05rem;
+        border-radius: 14px;
+      }
+
+      .field textarea {
+        min-height: 108px;
+      }
+
+      .task-card {
+        padding: 1rem;
+        border-radius: 20px;
+      }
+
+      .task-topline {
+        align-items: flex-start;
+      }
+
+      .tag {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .task-card h4 {
+        font-size: 1.08rem;
+        line-height: 1.2;
+      }
+
+      .status-box {
+        border-radius: 14px;
       }
     }
 
